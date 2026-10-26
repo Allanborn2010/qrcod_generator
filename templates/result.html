@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Result</title>
+    <title>Your QR Code</title>
 </head>
 <body>
-    <h1>Your QR code link</h1>
+    <h1>Your QR Code</h1>
 
-    <p>You submitted:</p>
+    <img src="data:image/png;base64,{{ qr_code }}" alt="QR code for {{ website_url }}">
 
+    <p>Created for:</p>
     <p>{{ website_url }}</p>
 
     <a href="/">Create another QR code</a>
