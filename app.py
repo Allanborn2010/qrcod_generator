@@ -23,9 +23,7 @@ def generate():
 
     encoded_image = base64.b64encode(image_data.getvalue()).decode("utf-8")
 
-    return render_template(
-        "result.html", qr_code=encoded_image, website_url=website_url
-    )
+    return render_template("index.html", qr_code=encoded_image, website_url=website_url)
 
 
 if __name__ == "__main__":

@@ -1,27 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR Code Generator</title>
-</head>
-<body>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
     <h1>QR Code Generator</h1>
 
     <p>Enter a link below to create a QR code.</p>
 
     <form action="/generate" method="POST">
-        <label for="website-url">Website URL:</label>
+      <label for="website-url">Website URL:</label>
 
-        <input
-            type="url"
-            id="website-url"
-            name="website-url"
-            placeholder="https://example.com"
-            required
-        >
+      <input
+        type="url"
+        id="website-url"
+        name="website-url"
+        placeholder="https://example.com"
+        value="{{ website_url or '' }}"
+        required
+      />
 
+      <div>
         <button type="submit">Generate QR Code</button>
+
+        {% if qr_code %}
+        <a href="data:image/png;base64,{{ qr_code }}" download="qr-code.png">
+          Download QR Code
+        </a>
+        {% endif %}
+      </div>
     </form>
-</body>
+
+    {% if qr_code %}
+    <section>
+      <h2>Your QR Code</h2>
+
+      <img
+        src="data:image/png;base64,{{ qr_code }}"
+        alt="QR code for {{ website_url }}"
+      />
+
+      <p>Created for: {{ website_url }}</p>
+    </section>
+    {% endif %}
+  </body>
 </html>
